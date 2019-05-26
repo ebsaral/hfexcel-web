@@ -21,7 +21,7 @@ class DocumentManagerView(TemplateResponseMixin, View):
         return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
-        version = '0.0.6'
+        version = '0.0.7'
         form = DocumentUploadForm(data=request.POST)
 
         if form.is_valid():
