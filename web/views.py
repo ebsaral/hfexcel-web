@@ -21,6 +21,7 @@ class DocumentManagerView(TemplateResponseMixin, View):
         return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
+        version = '0.0.5'
         form = DocumentUploadForm(data=request.POST)
 
         if form.is_valid():
@@ -33,7 +34,7 @@ class DocumentManagerView(TemplateResponseMixin, View):
                 web_data = hf_workbook.output.getvalue()
                 response = HttpResponse(content_type='application/vnd.ms-excel')
                 response.write(web_data)
-                response['Content-Disposition'] = f"attachment; filename=hfexcel-v0.0.4.xlsx"
+                response['Content-Disposition'] = f"attachment; filename=hfexcel-v{version}.xlsx"
                 return response
 
         context = {
