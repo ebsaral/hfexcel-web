@@ -21,14 +21,14 @@ class DocumentManagerView(TemplateResponseMixin, View):
         return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
-        version = '0.0.5'
+        version = '0.0.6'
         form = DocumentUploadForm(data=request.POST)
 
         if form.is_valid():
             data = form.cleaned_data.get('data')
             excel_data = json.loads(data)
             hf_workbook = HFExcel.hf_workbook()
-            hf_workbook.helper.populate_with_json(excel_data)
+            hf_workbook.filter().populate_with_json(excel_data)
             hf_workbook.save()
             if hf_workbook.output:
                 web_data = hf_workbook.output.getvalue()
