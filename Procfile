@@ -1,0 +1,1 @@
+web: gunicorn hfexcel_web.wsgi:application -b 0.0.0.0:$PORT --forwarded-allow-ips "*" --capture-output --enable-stdio-inheritance --log-file - --access-logfile - --error-logfile -
